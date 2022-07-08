@@ -1,0 +1,32 @@
+/*
+.......SABBIR HOSSAIN.....
+.......KUET-CSE18.........
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+ll G(ll x){
+    if(x<2)return 0;
+    if(x&1)return G(x/2);
+    return x/2;
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        x=0;
+        for(i=1;i<=n;i++){
+            cin>>k;
+            x^=G(k);
+        }
+        cout<<"Case "<<cs++<<": "<<((x)?"Alice\n":"Bob\n");
+    }
+}
+
+
