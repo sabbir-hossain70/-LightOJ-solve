@@ -1,0 +1,61 @@
+/*
+.......SABBIR HOSSAIN.....
+.......KUET-CSE18.........
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+vector<ll>val[20];
+
+ll findLcm(vector<ll>vec){
+    ll x=vec.size();
+    ll lcm=vec[0];
+    for(ll i=1;i<x;i++){
+        lcm=(((vec[i]*lcm))/(__gcd(vec[i],lcm)));
+    }
+    return lcm;
+}
+
+int main()
+{
+    //fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n>>m;
+        for(i=0;i<=18;i++)val[i].clear();
+        vector<ll>v;
+        set<ll>s;
+        for(i=0;i<m;i++){
+            cin>>k;
+            s.insert(k);
+        }
+        m=s.size();
+        for(auto z:s)v.push_back(z);
+        k=powl(2LL,m);
+        for(i=0;i<k;i++){
+            vector<ll>vec;
+            for(j=0;j<m;j++){
+                if((1LL<<j)&i){
+                    vec.push_back(v[j]);
+                }
+            }
+            x=vec.size();
+            if(x){
+                val[x].push_back(findLcm(vec));
+            }
+        }
+        ll ans=n;
+        for(i=1;i<=m;i++){
+            for(auto z:val[i]){
+                c=n/z;
+                if(i&1)ans-=c;
+                else ans+=c;
+                //cout<<"i "<<i<<" z "<<z<<" "<<c<<endl;
+            }
+        }
+        cout<<"Case "<<cs++<<": "<<ans<<"\n";
+    }
+}
+
