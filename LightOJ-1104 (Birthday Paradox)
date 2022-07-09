@@ -1,0 +1,29 @@
+/*
+.......SABBIR HOSSAIN.....
+.......KUET-CSE18.........
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+long double lim=0.5;
+
+ll solve(ll x){
+    long double div=x,p=1.0;
+    for(ll i=x;i>=0;i--){
+        p*=i/div;
+        if(p<=lim)return x-i;
+    }
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        cout<<"Case "<<cs++<<": "<<solve(n)<<"\n";
+    }
+}
+
