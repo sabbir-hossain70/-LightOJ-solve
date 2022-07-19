@@ -1,0 +1,25 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>x>>y;
+        cout<<"Case "<<cs++<<": ";
+        long double ans=0.0;
+        if(x%2==0){
+            ans=1.0/(x+1.0);
+        }
+        cout<<fixed<<setprecision(10)<<ans<<"\n";
+    }
+}
+
