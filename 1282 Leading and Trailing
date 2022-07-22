@@ -1,0 +1,37 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+ll bigpow(ll b,ll p){
+    if(p==0)return 1;
+    if(p%2==0){
+        ll m=bigpow(b%1000,p/2)%1000;
+        return (m*m)%1000;
+    }
+    return ((b%1000)*bigpow(b%1000,p-1))%1000;
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n>>k;
+        double d=k*log10(n);
+        d=d-(ll)d;
+        ll ans=pow(10,d)*100;
+        ll ans2=bigpow(n%1000,k)%1000;
+        cout<<"Case "<<cs++<<": "<<ans<<" ";
+        if(ans2<10)cout<<"00"<<ans2<<"\n";
+        else if(ans2<100)cout<<"0"<<ans2<<"\n";
+        else
+        cout<<ans2<<"\n";
+    }
+}
+
