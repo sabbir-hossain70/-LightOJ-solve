@@ -1,0 +1,42 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+typedef long double ld;
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,cs=1;
+    cin>>t;
+    while(t--){
+        ld given,x,y;
+        cin>>given>>n;
+        ll a[n+3];
+        ld p[n+3];
+        c=0;
+        for(i=0;i<n;i++){
+            cin>>a[i]>>p[i];
+            c+=a[i];
+        }
+        ld dp[c+3]={0.0};
+        dp[0]=1.0;
+        for(i=0;i<n;i++){
+            for(j=c;j-a[i]>=0;j--){
+                dp[j]=max(dp[j],dp[j-a[i]]*(1.0-p[i]));
+            }
+        }
+        for(i=c;i>=0;i--){
+            if(1.0-dp[i]<=given){
+                cout<<"Case "<<cs++<<": "<<i<<"\n";
+                break;
+            }
+
+        }
+    }
+}
+
