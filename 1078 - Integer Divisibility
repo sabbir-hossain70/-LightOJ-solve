@@ -1,0 +1,29 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+ll k,n;
+
+ll check(){
+    ll rem=0;
+    for(ll i=1;i<=1000001;i++){
+        rem=(rem*10+k)%n;
+        if(!rem)return i;
+    }
+}
+
+int main()
+{
+    fast
+    ll i,j,m,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n>>k;
+        cout<<"Case "<<cs++<<": "<<check()<<"\n";
+    }
+}
+
