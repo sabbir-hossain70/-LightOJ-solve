@@ -1,0 +1,48 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+ll dp[505][505],mod=1e9+7;
+vector<ll>prime;
+
+void sieve(){
+    bool mark[10003]={0};
+    prime.push_back(-3);
+    prime.push_back(2);
+    for(ll i=3;i<=1e4;i+=2){
+        if(!mark[i]){
+            prime.push_back(i);
+            for(ll j=i*i;j<=1e4;j+=i+i)
+                mark[j]=1;
+        }
+    }
+}
+
+void call(){
+    sieve();
+    dp[1][1]=1;
+    for(ll i=2;i<=500;i++)
+        dp[i][1]=(dp[i-1][1]+dp[i-1][1])%mod;
+    for(ll k=2;k<=500;k++){
+        for(ll p=1;p<=k;p++){
+            dp[k][p]=(dp[k-1][p]*prime[p]+dp[k-1][p-1]*(prime[p]-1))%mod;
+        }
+    }
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1,p;
+    call();
+    cin>>t;
+    while(t--){
+        cin>>k>>p;
+        cout<<"Case "<<cs++<<": "<<dp[k][p]<<"\n";
+    }
+}
+
