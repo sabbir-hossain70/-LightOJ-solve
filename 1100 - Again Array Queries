@@ -1,0 +1,44 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+vector<ll>v[1005];
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,q,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>n>>q;
+        for(i=0;i<=1000;i++)v[i].clear();
+        for(i=0;i<n;i++){
+            cin>>k;
+            v[k].push_back(i);
+        }
+        cout<<"Case "<<cs++<<":\n";
+        while(q--){
+            cin>>x>>y;
+            vector<ll>vec;
+            for(i=1;i<=1000;i++){
+                c=upper_bound(v[i].begin(),v[i].end(),y)-
+                  lower_bound(v[i].begin(),v[i].end(),x);
+                if(c>1)break;
+                if(c)vec.push_back(i);
+            }
+            if(i<=1000){cout<<"0\n";continue;}
+            m=vec.size();
+            ll mn=LLONG_MAX;
+            for(i=0;i<m-1;i++){
+              mn=min(vec[i+1]-vec[i],mn);
+            }
+            cout<<mn<<"\n";
+        }
+    }
+}
+
+
