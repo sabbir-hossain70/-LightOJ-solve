@@ -1,0 +1,31 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+map<string,ll>mp;
+
+ll call(string s){
+    if(mp.count(s))return mp[s];
+    ll n=s.size();
+    if(n==1||(n==2&&s[0]==s[1]))return 0;
+    if(s[0]==s[n-1])return mp[s]=call(s.substr(1,n-2));
+    return mp[s]=min(call(s.substr(0,n-1)),call(s.substr(1,n-1)))+1;
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,cs=1;
+    cin>>t;
+    string s;
+    while(t--){
+        mp.clear();
+        cin>>s;
+        cout<<"Case "<<cs++<<": "<<call(s)<<"\n";
+    }
+}
+
