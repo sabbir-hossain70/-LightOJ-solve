@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+ll mod=1e8+7,f[2000011];
+set<ll>s;
+vector<ll>v;
+
+ll bin_exp(ll b,ll p){
+    if(!p)return 1;
+    if(p%2==0){
+        ll tmp=bin_exp(b,p/2)%mod;
+        return (tmp*tmp)%mod;
+    }
+    return (b*bin_exp(b,p-1))%mod;
+}
+
+ll cat(ll x){
+    if(!x)return 0;
+    return (f[x+x]*bin_exp((((f[x]*f[x])%mod)*(x+1))%mod,mod-2))%mod;
+}
+
+void pre(){
+    for(ll i=2;i<=100000;i++){
+        ll x=i*i;
+        while(x<=1e10){
+            s.insert(x);
+            x*=i;
+        }
+    }
+    for(auto z:s)v.push_back(z);
+    f[0]=f[1]=1;
+    for(ll i=2;i<=2e6+3;i++){
+        f[i]=(f[i-1]*i)%mod;
+    }
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y,b,cs=1;
+    pre();
+    cin>>t;
+    while(t--){
+        cin>>x>>y;
+        c=upper_bound(v.begin(),v.end(),y)-lower_bound(v.begin(),v.end(),x);
+        cout<<"Case "<<cs++<<": "<<cat(c)<<"\n";
+    }
+}
+
