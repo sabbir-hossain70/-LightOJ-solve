@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+ll mod=1e9;
+
+ll bin_exp(ll b,ll p){
+    if(!p)return 1;
+    if(p%2==0){
+        ll tmp=bin_exp(b,p/2)%mod;
+        return (tmp*tmp)%mod;
+    }
+    return (b*bin_exp(b,p-1))%mod;
+}
+
+int main()
+{
+    //fast
+    ll i,j,k,m,n,c,t,x,y,b,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>m>>n>>k>>b;
+        map<ll,ll>mp;
+        vector<ll>v[555];
+        c=1;
+        while(b--){
+            cin>>x>>y;
+            if(!mp.count(y)){
+                mp[y]=c++;
+            }
+            v[mp[y]].push_back(x);
+        }
+        x=mp.size();
+        y=n-x;        
+        ll ans=1;
+        ans=k*bin_exp(k-1,m-1);
+        ans%=mod;
+        ans=bin_exp(ans,y)%mod;
+        for(auto z:mp){
+            x=z.second;
+            v[x].push_back(m+1);
+            sort(v[x].begin(),v[x].end());
+            y=v[x].size();
+            ll pre=1;
+            for(i=0;i<y;i++){
+               c=v[x][i]-pre;
+               if(c){
+                 ans=(ans*k)%mod;
+                 ans=(ans*bin_exp(k-1,c-1))%mod;
+               }
+               pre=v[x][i]+1;
+            }
+        }
+        cout<<"Case "<<cs++<<": "<<ans<<"\n";
+    }
+}
+
