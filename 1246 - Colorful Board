@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+ll k,m,n,C[55][55],cnt[455][55],mod=1e9+7;
+
+void pre(){
+    for(ll i=0;i<=51;i++){
+        C[i][0]=C[i][i]=1;
+        for(ll j=1;j<=i;j++){
+            C[i][j]=(C[i-1][j]+C[i-1][j-1])%mod;
+        }
+    }
+    for(ll ind=1;ind<=411;ind++){
+        cnt[ind][1]=1;
+        for(ll col=2;col<=52;col++){
+            cnt[ind][col]=(col*(cnt[ind-1][col]+cnt[ind-1][col-1])%mod)%mod;
+        }
+    }
+}
+
+ll solve(){
+    ll ret=0;
+    ll c=(m+1)*(n+1),c1,c2;
+    if(m==0&&n==0)return k;
+    c1=c/2;
+    c2=c1;
+    if(c2+c1!=c)c1++;
+    for(ll i=1;i<k;i++){
+        for(ll j=1;i+j<=k;j++){
+            c=(C[k][i]*C[k-i][j])%mod;
+            c=(c*cnt[c1][i])%mod;
+            c=(c*cnt[c2][j])%mod;
+            ret=(ret+c)%mod;
+        }
+    }
+    return ret;
+}
+
+int main()
+{
+    fast
+    ll i,j,c,t,x,y,cs=1;
+    pre();
+    cin>>t;
+    while(t--){
+        cin>>m>>n>>k;
+        cout<<"Case "<<cs++<<": "<<solve()<<"\n";
+    }
+}
+
