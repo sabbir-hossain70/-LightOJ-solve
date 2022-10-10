@@ -1,0 +1,23 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+int main()
+{
+    fast
+    ll i,j,t,cs=1;
+    cin>>t;
+    while(t--){
+        long double ans,n,m,k,p;
+        cin>>n>>m>>k>>p;
+        ans=n*k*p;
+        cout<<"Case "<<cs++<<": "<<fixed<<setprecision(11)<<ans<<"\n";
+    }
+
+}
+
