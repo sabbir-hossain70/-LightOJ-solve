@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+struct SimpleHash {
+    long long len, base, mod;
+    vector<long long> P, H, R;
+    SimpleHash() {}
+    SimpleHash(string str, long long b, long long m) {
+        base = b, mod = m, len = str.size();
+        P.resize(len + 4, 1), H.resize(len + 3, 0), R.resize(len + 3, 0);
+        for (long long i = 1; i <= len + 3; i++)
+            P[i] = (P[i - 1] * base) % mod;
+        for (long long i = 1; i <= len; i++)
+            H[i] = (H[i - 1] * base + str[i - 1]-'A'+1) % mod;
+        for (long long i = len; i >= 1; i--)
+            R[i] = (R[i + 1] * base + str[i - 1]-'A'+1) % mod;
+    }
+    inline long long range_hash(long long l, long long r) {
+        long long hashval = (H[r + 1] - (P[r - l + 1] * H[l] % mod))%mod;
+        return (hashval < 0 ? hashval + mod : hashval);
+    }
+    inline long long reverse_hash(long long l, long long r) {
+        long long hashval = R[l + 1] - (P[r - l + 1] * R[r + 2] % mod);
+        return (hashval < 0 ? hashval + mod : hashval);
+    }
+};
+
+ll dp[1009],n;
+string s;
+SimpleHash sh;
+
+ll call(ll ind){
+    ll ret=1e18;
+    if(dp[ind]!=-1)return dp[ind];
+    for(ll i=ind;i<n;i++){
+        if(sh.range_hash(ind,i)==sh.reverse_hash(ind,i)){
+            ret=min(ret,1+call(i+1));
+        }
+    }
+    return dp[ind]=ret;
+}
+
+int main()
+{
+    fast
+    ll i,j,k,m,c,t,x,y,cs=1;
+    cin>>t;
+    while(t--){
+        cin>>s;
+        n=s.size();
+        memset(dp,-1,sizeof(dp));
+        dp[n]=0;
+        sh=SimpleHash(s,31, 2091573227);
+        cout<<"Case "<<cs++<<": "<<call(0)<<"\n";
+    }
+}
+
