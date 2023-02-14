@@ -1,0 +1,51 @@
+/*
+.....SABBIR HOSSAIN....
+.......KUET_CSE18......
+*/
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,c,t,x,y;
+    
+}
+
+
+#include<bits/stdc++.h>
+using  namespace std;
+#define fast {ios_base::sync_with_stdio(false); cin.tie(0);}
+typedef long long ll;
+long double PI=4*atan(1);
+
+int main()
+{
+    fast
+    ll i,j,k,m,n,t,cs=1;
+    cin>>t;
+    while(t--){
+        long double x1,y1,x2,y2,r1,r2,c1,c2,t1,t2,s1,s2,d,a1,a2;
+        cin>>x1>>y1>>r1>>x2>>y2>>r2;
+        cout<<"Case "<<cs++<<": ";
+        d=(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+        d=sqrt(d);
+        if(d>=r1+r2){cout<<"0\n";continue;}
+        if(max(r1,r2)>=d+min(r1,r2)){
+            d=PI*min(r1,r2)*min(r1,r2);
+            cout<<fixed<<setprecision(10)<<d<<"\n";
+            continue;
+        }
+        a1=acos((r1*r1+d*d-r2*r2)/(2.0*r1*d));
+        a2=acos((r2*r2+d*d-r1*r1)/(2.0*r2*d));
+        s1=a1*r1*r1;
+        s2=a2*r2*r2;
+        t1=r1*r1*sin(a1)*cos(a1);
+        t2=r2*r2*sin(a2)*cos(a2);
+        d=s1+s2-t1-t2;
+        cout<<fixed<<setprecision(10)<<d<<"\n";
+    }
+}
+
